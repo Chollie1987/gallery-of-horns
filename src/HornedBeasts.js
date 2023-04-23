@@ -14,19 +14,18 @@ class HornedBeasts extends React.Component {
             likes: this.state.likes + 1
         })
     }
+
+    handleModalEvent = () => {
+        console.log(this.props.beast)
+        this.props.updateSelectedBeast(this.props.beast);
+        this.props.displayModal();
+    }
     render() {
+        // console.log(this.props);
         return (
-            // <div>
-            //   <img src= {this.props.image} alt={this.props.title} height={250}/>
-            //   <div>
-            //     <p>{this.props.description}</p>
-            //     <p>{this.state.likes} likes</p>
-            //     <button onClick={this.incrementLikes}>❤</button>
-            //   </div>
-            //   <h2>{this.props.title}</h2> 
-            // </div>
+           
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={this.props.image} />
+                <Card.Img variant="top" src={this.props.image} onClick={this.handleModalEvent} />
                 <Card.Body>
                     <Card.Title>{this.props.title}</Card.Title>
                         <Card.Text>
