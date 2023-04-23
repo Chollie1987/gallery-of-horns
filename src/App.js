@@ -2,29 +2,56 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Main.css';
+import SelectedBeast from "./SelectedBeast";
 
 
 class App extends React.Component {
-  render() {
+    constructor(props) {
+      super(props);
+      this.state = {
+        beasts: {},
+        showModal: false,
+        selectedBeast: {}
 
-    const beastsArr = [];
+      }
+    }
 
-    // beastsArr.forEach(HornedBeasts =>
-    //   beastsArr.push(
-    //     <HornedBeasts
-    //       title={HornedBeasts.title}
-    //       imgUrl={HornedBeasts.image_url}
-    //       description={HornedBeasts.description}
-    //     />
-    //   ),
+    updateSelectedBeast = (beast) => {
+      console.log(beast, 'this is our new beast')
+      this.setState({
+        selectedBeast: beast
+      })
+    }  
+      displayModal = () => { 
+      this.setState({showModal: true})
+    }
+
+    removeModal = () => {
+      this.setState({showModal: false})
+    }
+
+    beasts = (beastObj) => {
+      this.setState({beasts: beastObj})
+    }
+  
+    render() {
       return (
       <>
 
       <Header />
-      <Main />
-      {/* {beastsArr} */}
-      <div></div>
+      <Main 
+        displayModal={this.displayModal}
+        beasts={this.beasts}
+        updateSelectedBeast={this.updateSelectedBeast}
+        />
+     {/* {beastsArr} */}
+      {this.state.showModal &&<SelectedBeast 
+        showModal={this.state.showModal}
+        removeModal={this.removeModal}
+        selectedBeast={this.state.selectedBeast}
+      />}
       <Footer />
     </>
     )
