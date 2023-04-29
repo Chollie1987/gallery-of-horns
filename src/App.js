@@ -15,8 +15,8 @@ class App extends React.Component {
       beasts: {},
       showModal: false,
       selectedBeast: {},
-      filteredHorns: data
-
+      filteredBeasts: data,
+      hornSelection: 'all'
     }
   }
 
@@ -38,23 +38,32 @@ class App extends React.Component {
     this.setState({ beasts: beastObj })
   }
 
-  filteredHorns = (e) => {
+  handleHornSelection = (e) => {
     e.preventDefault();
-    let filteredHorns;
+    const hornNumber = e.target.value;
+    //if I want to refactor I could do a conditional where I check if the value of hornNumber equals all I skipped the filter and just assigned the state of filteredHorns directly to data.
+    let filteredHorns = data.filter(beast => {
+      if(hornNumber === "all") return true;
+      if(beast.horns === Number(hornNumber))return true;
+      return false;
+    })
+    this.setState({ filteredBeasts: filteredHorns, hornSelection: hornNumber })
+    //e.target.value will tell us how many horns the user selected. This is a string! We want to check the array for a number.
+    //We also want to set state for selectedHorn to be e.target.value the string.
 
 
   }
 
-}
-render(); {
+
+render() {
   return (
     <>
 
       <Header />
       <Form>
         <Form.Group>
-          <Form.Select onChange={this.hornChoice}>
-            <option>How many horns would you like?</option>
+          <Form.Select value={this.state.hornSelection}onChange={this.handleHornSelection}>
+            <option value="all">Show all Horned Beasts</option>
             <option value="1">One horn</option>
             <option value="2">Two horns</option>
             <option value="3">Three or more horns</option>
@@ -66,6 +75,7 @@ render(); {
         beasts={this.beasts}
         updateSelectedBeast={this.updateSelectedBeast}
         hornsData={this.state.hornsData}
+        filteredBeasts={this.state.filteredBeasts}
       />
       {/* {beastsArr} */}
       {this.state.showModal && <SelectedBeast
@@ -79,6 +89,6 @@ render(); {
   // return beastsArr;
 
 }
-
+}
 
 export default App;
