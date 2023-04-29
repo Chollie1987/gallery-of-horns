@@ -10,7 +10,7 @@ class Main extends React.Component {
             <div className="card">
                 <h2>HornedBeasts</h2>
                 <Row className="justify-content-md-center" lg="5" xs="5" sm="5">
-                {data.map((beast) => (
+                {this.props.filteredBeasts.map((beast) => (
                     <HornedBeasts title={beast.title}
                         description={beast.description}
                         image={beast.image_url}
