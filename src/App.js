@@ -63,10 +63,11 @@ render() {
       <Form>
         <Form.Group>
           <Form.Select value={this.state.hornSelection}onChange={this.handleHornSelection}>
-            <option value="all">Show all Horned Beasts</option>
+            <option value="all">All Horned Beasts</option>
             <option value="1">One horn</option>
             <option value="2">Two horns</option>
-            <option value="3">Three or more horns</option>
+            <option value="3">Three</option>
+            <option value="100">Too many to count</option>
           </Form.Select>
         </Form.Group>
       </Form>
